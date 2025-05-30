@@ -29,7 +29,8 @@ next_state - Следущее состояние светофора(меняет
 * Chi router
 * Docker
 * Prometheus + Grafana
-* Gitlab ci
+* Gitlab CI
+* Swagger
 
 ## Для запуска
 
