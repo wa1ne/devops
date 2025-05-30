@@ -25,8 +25,11 @@ next_state - Следущее состояние светофора(меняет
 
 **Технический стек**
 
-* Golang 
-* Json для получения/отправки данных
+* Golang
+* Chi router
+* Docker
+* Prometheus + Grafana
+* Gitlab ci
 
 ## Для запуска
 
