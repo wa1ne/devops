@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: traffic-light
+  labels:
+    app: traffic-light
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: traffic-light
+  template:
+    metadata:
+      labels:
+        app: traffic-light
+    spec:
+      containers:
+      - name: traffic-light-container
+        image: wa1ne/traffic-lights:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+        resources:
+          requests:
+            memory: 1Gi
+          limits:
+            cpu: 200m
+            memory: 1500Mi

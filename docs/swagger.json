@@ -1,0 +1,110 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/trafficlight": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Trafficlight"
+                ],
+                "summary": "Processing of traffic light control request",
+                "parameters": [
+                    {
+                        "enum": [
+                            1,
+                            2,
+                            3
+                        ],
+                        "type": "integer",
+                        "description": "Type of the trafficlight",
+                        "name": "type",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "description": "Json request",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.TrafficRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Json response",
+                        "schema": {
+                            "$ref": "#/definitions/models.TrafficResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request data",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.TrafficRequest": {
+            "type": "object",
+            "properties": {
+                "current_state": {
+                    "type": "integer"
+                },
+                "current_time": {
+                    "description": "Указатель для проверки существования",
+                    "type": "integer"
+                },
+                "need_image": {
+                    "type": "boolean"
+                },
+                "uuid": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.TrafficResponse": {
+            "type": "object",
+            "properties": {
+                "image": {
+                    "type": "string"
+                },
+                "next_countdown_time": {
+                    "type": "string"
+                },
+                "next_state": {
+                    "type": "string"
+                },
+                "uuid": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

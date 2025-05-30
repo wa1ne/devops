@@ -1,0 +1,71 @@
+definitions:
+  models.ErrorResponse:
+    properties:
+      error:
+        type: string
+    type: object
+  models.TrafficRequest:
+    properties:
+      current_state:
+        type: integer
+      current_time:
+        description: Указатель для проверки существования
+        type: integer
+      need_image:
+        type: boolean
+      uuid:
+        type: string
+    type: object
+  models.TrafficResponse:
+    properties:
+      image:
+        type: string
+      next_countdown_time:
+        type: string
+      next_state:
+        type: string
+      uuid:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /trafficlight:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Type of the trafficlight
+        enum:
+        - 1
+        - 2
+        - 3
+        in: query
+        name: type
+        required: true
+        type: integer
+      - description: Json request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.TrafficRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Json response
+          schema:
+            $ref: '#/definitions/models.TrafficResponse'
+        "400":
+          description: Invalid request data
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "500":
+          description: Server error
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: Processing of traffic light control request
+      tags:
+      - Trafficlight
+swagger: "2.0"
